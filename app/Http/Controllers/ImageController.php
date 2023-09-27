@@ -28,7 +28,14 @@ class ImageController extends Controller
             return response()->json(['invalid_file_upload'], 400);
         }
 
-        return response()->json($imageService->saveImage($request), 200);
+        if($request->type === 0) {
+            return response()->json($imageService->saveImageForHouse($request), 200);
+        } else if ($request->type === 1) {
+            return response()->json($imageService->saveImageForFlat($request), 200);
+        } else if ($request->type === 2) {
+            return response()->json($imageService->saveImageForMainHouseImage($request), 200);
+        }
+
     } //end
 
 }

@@ -44,7 +44,7 @@ class WaterMarkforMainHouseImage extends Command
 
             $image_info->resize = 1;
             $image_info->save();
-            
+
         }
 
         info('good update houses: ' . count($images));
