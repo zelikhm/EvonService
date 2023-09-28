@@ -23,7 +23,7 @@ class ImageService
     public function saveImageForHouse($data)
     {
 
-        return $data->imageName;
+        return $data;
 
         $data->image->move(public_path('/storage/buffer'), $data->imageName);
 
