@@ -77,4 +77,37 @@ class ImageService
         return true;
 
     } //end
+
+    /**
+     * delete main image for house
+     * @param $data
+     * @return bool
+     */
+
+    public function deleteMain($data): bool
+    {
+        MainHouseImage::where('image', $data->image)->delete();
+    } //end
+
+    /**
+     * delete image for house
+     * @param $data
+     * @return bool
+     */
+
+    public function deleteHouse($data): bool
+    {
+        HouseImageModel::where('file', $data->image)->delete();
+    } //end
+
+    /**
+     * delete image for flat
+     * @param $data
+     * @return bool
+     */
+
+    public function deleteFlat($data): bool
+    {
+        FlatImageModel::where('file', $data->image)->delete();
+    } //end
 }

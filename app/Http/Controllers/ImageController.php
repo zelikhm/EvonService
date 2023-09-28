@@ -38,4 +38,21 @@ class ImageController extends Controller
 
     } //end
 
+    /**
+     * deleted photo
+     * @param Request $request
+     * @param ImageService $imageService
+     * @return bool
+     */
+
+    public function delete(Request $request, ImageService $imageService) {
+        if($request->type === 0) {
+            return $imageService->deleteMain($request);
+        } else if ($request->type === 1) {
+            return $imageService->deleteHouse($request);
+        } else if ($request->type === 2) {
+            return $imageService->deleteFlat($request);
+        }
+    } //end
+
 }

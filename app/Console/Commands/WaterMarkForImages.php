@@ -47,6 +47,7 @@ class WaterMarkForImages extends Command
 
             $image_info->resize = 1;
             $image_info->save();
+
         }
 
         info('good update flats: ' . count($images));

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/main', ['App\Http\Controllers\ImageController', 'save']);
-Route::post('/flat', ['App\Http\Controllers\ImageController', 'save']);
-Route::post('/house', ['App\Http\Controllers\ImageController', 'save']);
+Route::middleware('checkToken')->group(function () {
+    Route::post('/add', ['App\Http\Controllers\ImageController', 'save']);
+    Route::post('/delete', ['App\Http\Controllers\ImageController', 'delete']);
+});
+
