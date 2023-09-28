@@ -23,11 +23,11 @@ class ImageService
     public function saveImageForHouse($data)
     {
 
-        $data->image->move(public_path('/storage/buffer'), $data->imageName);
+        $data->image->move(public_path('/storage/buffer'), $data->imageName . '.jpg');
 
         HouseImageModel::create([
             'image_id' => $data->image_id,
-            'file' => $data->imageName,
+            'file' => $data->imageName . '.jpg',
         ]);
 
         return true;
@@ -43,10 +43,10 @@ class ImageService
     public function saveImageForFlat($data): bool
     {
 
-        $data->image->move(public_path('/storage/buffer'), $data->imageName);
+        $data->image->move(public_path('/storage/buffer'), $data->imageName . '.jpg');
         FlatImageModel::create([
             'image_id' => $data->image_id,
-            'file' => $data->imageName,
+            'file' => $data->imageName . '.jpg',
         ]);
 
         return true;
@@ -61,11 +61,11 @@ class ImageService
     public function saveImageForMainHouseImage($data): bool
     {
 
-        $data->image->move(public_path('/storage/buffer'), $data->imageName);
+        $data->image->move(public_path('/storage/buffer'), $data->imageName . '.jpg');
 
         MainHouseImage::create([
             'house_id' => $data->image_id,
-            'image' => $data->imageName,
+            'image' => $data->imageName . '.jpg',
         ]);
 
         return true;
