@@ -23,6 +23,8 @@ class ImageService
     public function saveImageForHouse($data)
     {
 
+        return $data->imageName;
+
         $data->image->move(public_path('/storage/buffer'), $data->imageName);
 
         HouseImageModel::create([
