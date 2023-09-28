@@ -29,6 +29,7 @@ class ImageController extends Controller
         }
 
         if($request->type === 0) {
+            return 1;
             return response()->json($imageService->saveImageForHouse($request), 200);
         } else if ($request->type === 1) {
             return response()->json($imageService->saveImageForFlat($request), 200);
