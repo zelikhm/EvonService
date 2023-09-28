@@ -17,7 +17,7 @@ class CheckTokenMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(env('SERVICE_TOKEN') === $request->token) {
+        if(env('SERVICE_TOKEN') !== $request->token) {
             return response()->json('not auth', 401);
         }
 
