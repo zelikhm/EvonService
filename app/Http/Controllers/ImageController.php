@@ -18,6 +18,8 @@ class ImageController extends Controller
     public function save(Request $request, ImageService $imageService)
     {
 
+        dd($request->image);
+
         if(!$request->hasFile('image')) {
             return response()->json(['upload_file_not_found'], 400);
         }
