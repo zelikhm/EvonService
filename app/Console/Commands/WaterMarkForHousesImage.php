@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\FlatImageModel;
 use App\Models\HouseImageModel;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 use Intervention\Image\Facades\Image;
 
 class WaterMarkForHousesImage extends Command
@@ -43,7 +44,13 @@ class WaterMarkForHousesImage extends Command
             $image1->blur(50);
             $image1->insert($image, 'center');
 
-            $image1->save('public/storage/images/houses/' . $image_info->file, 100);
+            $image1->save('public/storage/images/' . $image_info->file, 100);
+
+            $http = Http::post(env('SERVICE_URL'), [
+                'type' => 1,
+                'image' => '/storage/images/' . $image_info->file,
+                'id' => $image_info->image_id
+            ]);
 
             unlink('public/storage/buffer/' . $image_info->file);
 

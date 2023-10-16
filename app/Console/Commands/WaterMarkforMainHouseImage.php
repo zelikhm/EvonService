@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\HouseImageModel;
 use App\Models\MainHouseImage;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 use Intervention\Image\Facades\Image;
 
 class WaterMarkforMainHouseImage extends Command
@@ -38,7 +39,13 @@ class WaterMarkforMainHouseImage extends Command
             $image->insert('public/images/watermark.png');
             $image->heighten(420);
 
-            $image->save('public/storage/images/houses/' . $image_info->image, 100);
+            $image->save('public/storage/images/' . $image_info->image, 100);
+
+            $http = Http::post(env('SERVICE_URL'), [
+                'type' => 0,
+                'image' => '/storage/images/' . $image_info->file,
+                'id' => $image_info->image_id
+            ]);
 
             unlink('public/storage/buffer/' . $image_info->image);
 
