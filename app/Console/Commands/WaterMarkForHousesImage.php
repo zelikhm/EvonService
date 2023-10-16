@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\FlatImageModel;
 use App\Models\HouseImageModel;
+use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Intervention\Image\Facades\Image;
@@ -33,6 +34,8 @@ class WaterMarkForHousesImage extends Command
     {
         $images = HouseImageModel::where('resize', 0)->get();
 
+        $client = new Client([ 'verify' => false ]);
+
         foreach ($images as $image_info) {
 
             $image = Image::make('public/storage/buffer/' . $image_info->file);
@@ -46,10 +49,14 @@ class WaterMarkForHousesImage extends Command
 
             $image1->save('public/storage/images/' . $image_info->file, 100);
 
-            $http = Http::post(env('SERVICE_URL'), [
+            $array = [
                 'type' => 1,
                 'image' => '/storage/images/' . $image_info->file,
                 'id' => $image_info->image_id
+            ];
+
+            $response = $client->post(env('SERVICE_URL'), [
+                'json' => $array,
             ]);
 
             unlink('public/storage/buffer/' . $image_info->file);
