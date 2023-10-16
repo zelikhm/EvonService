@@ -104,22 +104,4 @@ class ImageService
     {
         FlatImageModel::where('file', $data->image)->delete();
     } //end
-
-    public function resizeHouse($data)
-    {
-        $photo = HouseImageModel::where('image_id', $data->id)->first();
-
-        if($photo === null) {
-
-
-            HouseImageModel::create([
-                ''
-            ])
-        }
-    } //end
-
-    public function resizeFlats($data)
-    {
-
-    } //end
 }
